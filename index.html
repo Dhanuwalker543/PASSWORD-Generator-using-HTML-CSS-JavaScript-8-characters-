@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 10px;
+            background: linear-gradient(135deg, #1e1e1e, #4B0082, #9932CC);
+            color: rgb(136, 130, 130);
+        }
+
+        #password {
+            font-size: 1.2rem;
+            color: gray;
+            padding: 10px;
+            background-color: black;
+            border-radius: 25px;
+            border: 1px solid #9932CC;
+            width: 250px;
+            text-align: center;
+            margin-top: 10rem;
+            margin-left: 4rem;
+        }
+
+        .btn {
+            font-size: 1.2rem;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 25px;
+            border: 1px solid black;
+            background: linear-gradient(135deg, #4B0082, #9932CC);
+            color: black;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: color 0.4s;
+        }
+
+        .btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #9932CC, #4B0082);
+            z-index: 1;
+            transition: transform 0.4s;
+            transform: scaleX(0);
+            transform-origin: right;
+        }
+
+        .btn:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .btn:hover {
+            color: #4B0082;
+            border-color: #4B0082;
+        }
+
+        .btn span {
+            position: relative;
+            z-index: 2;
+        }
+
+        #tit{
+            margin-top: 4rem;
+            font-size: 5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="tit">Shhhhhh!</h1>
+    <input type="text" id="password" readonly>
+    <button onclick="copy()" id="copy" class="btn"><span>📋</span></button>
+    <br>
+    <button onclick="generator()" id="gen" class="btn"><span>Generate</span></button>
+    <script>
+        function generator() {
+            var ch = ["!", "@", "#", "$", "%", "^", "&", "*"];
+            const alp = [
+                'A', 'B', 'C', 'D', 'E', 'F', 'G',
+                'H', 'I', 'J', 'K', 'L', 'M', 'N',
+                'O', 'P', 'Q', 'R', 'S', 'T', 'U',
+                'V', 'W', 'X', 'Y', 'Z',
+                'a', 'b', 'c', 'd', 'e', 'f', 'g',
+                'h', 'i', 'j', 'k', 'l', 'm', 'n',
+                'o', 'p', 'q', 'r', 's', 't', 'u',
+                'v', 'w', 'x', 'y', 'z'
+            ];
+            let ran = "";
+            let pass = "";
+            let disp = document.getElementById("password");
+            let ram = Math.floor(Math.random() * 10000) + 1;
+            for (let i = 0; i <= 2; i++) {
+                ran = ch[Math.floor(Math.random() * ch.length)] + ram;
+                ran = ch[Math.floor(Math.random() * ch.length)] + ran;
+            }
+            for (let i = 0; i <= 2; i++) {
+                pass = alp[Math.floor(Math.random() * alp.length)] + ran;
+                pass = alp[Math.floor(Math.random() * alp.length)] + pass;
+            }
+            disp.value = pass;
+        }
+
+        function copy() {
+            var copyText = document.getElementById("password");
+            navigator.clipboard.writeText(copyText.value);
+            alert("Copied!");
+        }
+    </script>
+</body>
+
+</html>
